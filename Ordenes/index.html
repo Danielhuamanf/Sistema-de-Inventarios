@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes de Compra - PeruPixel</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="style.css">
+    
+    
+
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <!-- Logo y nombre alineados horizontalmente -->
+            <div class="logo">
+                <img src="../imagenes/Logo.jpg" alt="Logos PeruPixel" class="logo-image"> 
+                <span class="logo-text">PERUPIXEL</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../Dashboard/index.html">Dashboard</a></li>
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Inventory</a></li>
+                    <li><a href="#">Reports</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="orders-section">
+            <div class="orders-header">
+                <h1>Órdenes de Compra</h1>
+                <!-- Botón +New añadido -->
+                <button class="new-order-button">+ New</button>
+            </div>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Nº Orden</th>
+                        <th>Cliente</th>
+                        <th>Estado</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-06-01</td>
+                        <td>SO1v001</td>
+                        <td>Corporación Acme</td>
+                        <td>Enviado</td>
+                        <td>S/ 4250.00</td>
+                    </tr>
+                    <tr>
+                        <td>2024-06-02</td>
+                        <td>SO1v002</td>
+                        <td>Soluciones Bravo</td>
+                        <td>Pendiente</td>
+                        <td>S/ 4440.00</td>
+                    </tr>
+                    <tr>
+                        <td>2024-06-03</td>
+                        <td>SO1v003</td>
+                        <td>Taller de Charlie</td>
+                        <td>Cancelado</td>
+                        <td>S/ 1850.00</td>
+                    </tr>
+                    <tr>
+                        <td>2024-06-03</td>
+                        <td>SO1v004</td>
+                        <td>Delta Retail</td>
+                        <td>Procesando</td>
+                        <td>S/ 2775.00</td>
+                    </tr>
+                    <!-- Añadir más filas según sea necesario -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
