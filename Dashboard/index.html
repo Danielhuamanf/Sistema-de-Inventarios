@@ -9,25 +9,151 @@
 </head>
 <body>
     <div class="container">
-        <aside class="sidebar">
-            <!-- Logo y nombre alineados horizontalmente -->
-            <div class="logo">
-                <img src="../imagenes/Logo.jpg" alt="Logo PeruPixel" class="logo-image"> 
-                <span class="logo-text">PERUPIXEL</span>
+        <div class="navigation">
+            <ul>
+                <li class="logo-item">
+                    <a href="#">
+                        <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">  
+                        <span class="title">PERUPIXEL</span>   
+                    </a>
+                </li>
+                <li class="divider"></li> <!-- Línea divisoria -->
+                <li><a href="#"><span class="title">Panel Principal</span></a></li>
+                <li><a href="../Ordenes/index.html"><span class="title">Órdenes</span></a></li>
+                <li><a href="#"><span class="title">Inventario</span></a></li>
+                <li><a href="#"><span class="title">Reportes</span></a></li>
+                <li class="separator"></li> <!-- Línea divisoria -->
+                <li class="fin"><a href="../Inicio Sesion/index.html"><span class="title">Salir</span></a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="topbar">             
+                <h1 class="search">Panel Principal</h1>
+                <div class="user">
+                    <img src="../imagenes/usuarioVacio.png" alt="Usuario">
+                </div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="../Ordenes/index.html">Orders</a></li>
-                    <li><a href="#">Inventory</a></li>
-                    <li><a href="#">Reports</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="orders-section">
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">1,504</div>
+                        <div class="cardName">Visitas Diarias</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">80</div>
+                        <div class="cardName">Ventas</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="cart-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">284</div>
+                        <div class="cardName">Comentarios</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">S/7,842</div>
+                        <div class="cardName">Ganancias</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <!-- ================ Add Charts JS ================= -->
+            <div class="chartsBx">
+                <div class="chart"> <canvas id="chart-1"></canvas> </div>
+                <div class="chart"> <canvas id="chart-2"></canvas> </div>
+            </div>
           
-        </main>
+            <!-- ================ Lista de Detalles de Órdenes ================= -->
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Órdenes Recientes</h2>
+                        <a href="#" class="btn">Ver Todas</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>Precio</td>
+                                <td>Pago</td>
+                                <td>Estado</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Refrigeradora Star</td>
+                                <td>S/1,200</td>
+                                <td>Pagado</td>
+                                <td><span class="status delivered">Entregado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Laptop Dell</td>
+                                <td>S/110</td>
+                                <td>Pendiente</td>
+                                <td><span class="status pending">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                                <td>Apple Watch</td>
+                                <td>S/1,200</td>
+                                <td>Pagado</td>
+                                <td><span class="status return">Devuelto</span></td>
+                            </tr>
+                            <tr>
+                                <td>Zapatillas Adidas</td>
+                                <td>S/620</td>
+                                <td>Pendiente</td>
+                                <td><span class="status inProgress">En Proceso</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- ================= Clientes Recientes ================ -->
+                <div class="recentCustomers">
+                    <div class="cardHeader">
+                        <h2>Clientes Recientes</h2>
+                    </div>
+                    <table>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="../imagenes/usuarioVacio.png" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>David <br> <span>Italia</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="../imagenes/usuarioVacio.png" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Amit <br> <span>India</span></h4>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+   
+    <!-- ======= Charts JS ====== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="../Dashboard/chartsJS.js"></script>
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
