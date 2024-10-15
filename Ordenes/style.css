@@ -1,5 +1,12 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "ubuntu", sans-serif;
     background-color: #f4f4f9;
     color: #333;
 }
@@ -80,6 +87,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    margin-left: auto;
 }
 
 .new-order-button:hover {

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario - PeruPixel</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../Dashboard/style.css"> <!-- Vinculación al CSS general -->
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li class="logo-item">
+                    <a href="#">
+                        <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">  
+                        <span class="title">PERUPIXEL</span>   
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="../Dashboard/index.html"><span >Panel Principal</span></a></li>
+                <li><a href="../Ordenes/index.html"><span >Órdenes</span></a></li>
+                <li><a href="#"><span >Inventario</span></a></li>
+                <li><a href="../Reportes/index.html"><span >Reportes</span></a></li>
+                <li class="separator"></li>
+                <li class="fin"><a href="../Inicio Sesion/index.html"><span>Salir</span></a></li>
+            </ul>
+        </div>
+        
+        <div class="main">
+            <div class="topbar">
+                <h1>Gestión de Inventario</h1>
+            </div>
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Producto</td>
+                            <td>Cantidad Disponible</td>
+                            <td>Características Técnicas</td>
+                            <td>Precio</td>
+                            <td>Acciones</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Celular XYZ</td>
+                            <td>20</td>
+                            <td>16GB RAM, 128GB ROM</td>
+                            <td>S/. 799.00</td>
+                            <td>
+                                <button onclick="editarProducto()">Editar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Televisor ABC</td>
+                            <td>10</td>
+                            <td>55 pulgadas, 4K</td>
+                            <td>S/. 1,500.00</td>
+                            <td>
+                                <button onclick="editarProducto()">Editar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button onclick="nuevoProducto()">Nuevo Producto</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

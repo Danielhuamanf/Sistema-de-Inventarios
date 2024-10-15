@@ -72,6 +72,7 @@ body {
     text-align: center;
     margin-bottom: 50px;
     color: #333;
+	font-weight: bolder;
 }
 
 .login-section form {

@@ -4,79 +4,202 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Órdenes de Compra - PeruPixel</title>
-    <link rel="stylesheet" href="../reset.css">
-    <link rel="stylesheet" href="style.css">
-    
-    
 
+    <link rel="stylesheet" href="../reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="EstiloVentanaNueva.css">
+    <link rel="stylesheet" href="../Dashboard/style.css">
 </head>
 <body>
     <div class="container">
-        <aside class="sidebar">
-            <!-- Logo y nombre alineados horizontalmente -->
-            <div class="logo">
-                <img src="../imagenes/Logo.jpg" alt="Logos PeruPixel" class="logo-image"> 
-                <span class="logo-text">PERUPIXEL</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="../Dashboard/index.html">Dashboard</a></li>
-                    <li><a href="#">Orders</a></li>
-                    <li><a href="#">Inventory</a></li>
-                    <li><a href="#">Reports</a></li>
-                </ul>
-            </nav>
-        </aside>
+        <div class="navigation">
+            <ul>
+                <li class="logo-item">
+                    <a href="#">
+                        <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">  
+                        <span class="title">PERUPIXEL</span>   
+                    </a>
+                </li>
+                <li class="divider"></li> <!-- Línea divisoria -->
+                <li><a href="../Dashboard/index.html"><span>Panel Principal</span></a></li>
+                <li><a href="../Ordenes/index.html"><span>Órdenes</span></a></li>
+                <li><a href="../Inventario/index.html"><span>Inventario</span></a></li>
+                <li><a href="../Reportes/index.html"><span>Reportes</span></a></li>
+                <li class="separator"></li> <!-- Línea divisoria -->
+                <li class="fin"><a href="../Inicio Sesion/index.html"><span>Salir</span></a></li>
+            </ul>
+        </div>
 
-        <main class="orders-section">
-            <div class="orders-header">
+        <div class="main">
+            <div class="topbar">             
                 <h1>Órdenes de Compra</h1>
-                <!-- Botón +New añadido -->
-                <button class="new-order-button">+ New</button>
+                <div class="user">
+                    <img src="../imagenes/usuarioVacio.png" alt="Usuario">
+                </div>
             </div>
-            <table class="orders-table">
+
+            <div class="orders-section">
+                <div class="orders-header">
+                    <button id="newBtn" class="new-order-button">+ Nueva</button>
+                </div>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nº Orden</th>
+                            <th>Cliente</th>
+                            <th>Estado</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-06-01</td>
+                            <td>SO1v001</td>
+                            <td>Corporación Acme</td>
+                            <td>Enviado</td>
+                            <td>S/ 4250.00</td>
+                        </tr>
+                        <tr>
+                            <td>2024-06-02</td>
+                            <td>SO1v002</td>
+                            <td>Soluciones Bravo</td>
+                            <td>Pendiente</td>
+                            <td>S/ 4440.00</td>
+                        </tr>
+                        <tr>
+                            <td>2024-06-03</td>
+                            <td>SO1v003</td>
+                            <td>Taller de Charlie</td>
+                            <td>Cancelado</td>
+                            <td>S/ 1850.00</td>
+                        </tr>
+                        <tr>
+                            <td>2024-06-03</td>
+                            <td>SO1v004</td>
+                            <td>Delta Retail</td>
+                            <td>Procesando</td>
+                            <td>S/ 2775.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Orden de Compra</h2>
+            <div class="form-group">
+                <label for="buscarProducto">Buscar producto:</label>
+                <input type="text" id="buscarProducto" placeholder="Buscar producto...">
+            </div>
+            <div class="form-group">
+                <label for="companyName">Nombre de la empresa:</label>
+                <input type="text" id="companyName" value="Sysco">
+            </div>
+            <div class="form-group">
+                <label for="phone">Teléfono:</label>
+                <input type="text" id="phone" value="123-567-8309">
+            </div>
+
+            <!-- Tabla dentro del modal -->
+            <table>
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Nº Orden</th>
-                        <th>Cliente</th>
-                        <th>Estado</th>
-                        <th>Total</th>
+                        <th>Nombre</th>
+                        <th>Precio de Venta (S/)</th>
+                        <th>Precio de Compra (S/)</th>
+                        <th>Stock</th>
+                        <th>Información</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2024-06-01</td>
-                        <td>SO1v001</td>
-                        <td>Corporación Acme</td>
-                        <td>Enviado</td>
-                        <td>S/ 4250.00</td>
+                        <td>Omega Watch Series 4</td>
+                        <td>S/ 1295.00</td>
+                        <td>S/ 1100.00</td>
+                        <td>120</td>
+                        <td>
+                            <button class="edit-btn">&#9998;</button>
+                            <button class="view-btn">&#128065;</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>2024-06-02</td>
-                        <td>SO1v002</td>
-                        <td>Soluciones Bravo</td>
-                        <td>Pendiente</td>
-                        <td>S/ 4440.00</td>
+                        <td>Alpha Smartphone 12</td>
+                        <td>S/ 3696.30</td>
+                        <td>S/ 3000.00</td>
+                        <td>30</td>
+                        <td>
+                            <button class="edit-btn">&#9998;</button>
+                            <button class="view-btn">&#128065;</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>2024-06-03</td>
-                        <td>SO1v003</td>
-                        <td>Taller de Charlie</td>
-                        <td>Cancelado</td>
-                        <td>S/ 1850.00</td>
+                        <td>Gamma Bluetooth Headset</td>
+                        <td>S/ 481.96</td>
+                        <td>S/ 400.00</td>
+                        <td>150</td>
+                        <td>
+                            <button class="edit-btn">&#9998;</button>
+                            <button class="view-btn">&#128065;</button>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>2024-06-03</td>
-                        <td>SO1v004</td>
-                        <td>Delta Retail</td>
-                        <td>Procesando</td>
-                        <td>S/ 2775.00</td>
-                    </tr>
-                    <!-- Añadir más filas según sea necesario -->
                 </tbody>
             </table>
-        </main>
+
+            <div class="form-group">
+                <label for="total">TOTAL:</label>
+                <input type="text" id="total" value="S/ 6000" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select id="estado">
+                    <option>Pendiente</option>
+                    <option>Procesando</option>
+                    <option>Enviado</option>
+                </select>
+            </div>
+
+            <button id="saveBtn">Guardar</button>
+            <button id="cancelBtn">Cancelar</button>
+        </div>
     </div>
+
+    <!-- Script para controlar el modal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var modal = document.getElementById("modal");
+            var btn = document.getElementById("newBtn");
+            var span = document.getElementsByClassName("close")[0];
+            var cancelBtn = document.getElementById("cancelBtn");
+
+            // Abrir modal al hacer clic en el botón + Nueva
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            // Cerrar modal al hacer clic en la "x"
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // Cerrar modal al hacer clic en el botón Cancelar
+            cancelBtn.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // Cerrar modal si se hace clic fuera de él
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
 </body>
 </html>
