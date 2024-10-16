@@ -45,27 +45,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Celular XYZ</td>
-                            <td>20</td>
-                            <td>16GB RAM, 128GB ROM</td>
-                            <td>S/. 799.00</td>
-                            <td>
-                                <button onclick="editarProducto()">Editar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Televisor ABC</td>
-                            <td>10</td>
-                            <td>55 pulgadas, 4K</td>
-                            <td>S/. 1,500.00</td>
-                            <td>
-                                <button onclick="editarProducto()">Editar</button>
-                            </td>
-                        </tr>
+            <tr>
+                <td>Celular XYZ</td>
+                <td>20</td>
+                <td>16GB RAM, 128GB ROM</td>
+                <td>S/. 799.00</td>
+                <td>
+                    <button onclick="editarProducto('Celular XYZ', '20', '16GB RAM, 128GB ROM', 'S/. 799.00')">Editar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Televisor ABC</td>
+                <td>10</td>
+                <td>55 pulgadas, 4K</td>
+                <td>S/. 1,500.00</td>
+                <td>
+                    <button onclick="editarProducto('Televisor ABC', '10', '55 pulgadas, 4K', 'S/. 1,500.00')">Editar</button>
+                </td>
+            </tr>
+            <!-- Productos adicionales como ejemplos -->
+            <tr>
+                <td>Tablet DEF</td>
+                <td>15</td>
+                <td>10 pulgadas, 64GB</td>
+                <td>S/. 550.00</td>
+                <td>
+                    <button onclick="editarProducto('Tablet DEF', '15', '10 pulgadas, 64GB', 'S/. 550.00')">Editar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Monitor GHI</td>
+                <td>8</td>
+                <td>27 pulgadas, Full HD</td>
+                <td>S/. 700.00</td>
+                <td>
+                    <button onclick="editarProducto('Monitor GHI', '8', '27 pulgadas, Full HD', 'S/. 700.00')">Editar</button>
+                </td>
+            </tr>
                     </tbody>
                 </table>
-                <button onclick="nuevoProducto()">Nuevo Producto</button>
+                <button onclick="window.location.href='nuevo_producto.html'" class="new-product-button">Nuevo Producto</button>
             </div>
         </div>
     </div>

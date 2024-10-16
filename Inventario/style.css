@@ -19,7 +19,8 @@ body {
     position: fixed;
     width: 300px;
     height: 100%;
-    background: var(--blue);
+    background: #003366;
+    color: white;
     transition: 0.5s;
     padding-top: 20px;
 }
@@ -29,33 +30,90 @@ body {
     width: calc(100% - 300px);
     left: 300px;
     min-height: 100vh;
-    background: var(--white);
-    transition: 0.5s;
+    background: #f4f4f4;
+    padding: 40px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: white; /* Fondo blanco para la tabla */
 }
 
 table thead {
-    background: var(--gray);
+    background: #003366; /* Fondo azul para los encabezados */
+}
+
+table thead th {
+    color: white; /* Texto blanco para los encabezados */
+    padding: 10px;
+    text-align: left;
 }
 
 table tbody tr td {
     padding: 10px;
-    color: var(--black2);
+    color: #333; /* Color oscuro para el texto del cuerpo */
+    border-bottom: 1px solid #ccc; /* Bordes entre las filas */
 }
 
-button {
-    background-color: var(--blue);
+.new-product-button {
+    background-color: blue; 
     color: white;
-    border: none;
     padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
     cursor: pointer;
+    margin-top: 20px; /* Espacio entre el botón y la tabla */
+    display: block; /* Para que el botón ocupe todo el ancho de su contenedor */
+    text-align: center;
 }
 
-button:hover {
-    background-color: var(--gray);
+.new-product-button:hover {
+    background-color: #218838; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilos para el formulario de nuevo producto */
+.new-product-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.new-product-form label {
+    margin: 10px 0 5px;
+}
+
+.new-product-form input {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.submit-button, .cancel-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submit-button {
+    background-color: #003366;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.submit-button:hover, .cancel-button:hover {
+    opacity: 0.8;
 }

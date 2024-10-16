@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nuevo Producto - PeruPixel</title>
+    <link rel="stylesheet" href="style.css"> <!-- Reutiliza el CSS de inventario para mantener el diseño -->
+</head>
+<body>
+    <div class="container">
+        <h2>Agregar Nuevo Producto</h2>
+        <form class="new-product-form" action="#" method="post">
+            <label for="productName">Nombre del Producto:</label>
+            <input type="text" id="productName" name="productName" required>
+
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" required>
+
+            <label for="category">Características Técnicas:</label>
+            <input type="text" id="category" name="category" required>
+
+            <label for="price">Precio:</label>
+            <input type="text" id="price" name="price" required>
+
+            <button type="submit" class="submit-button">Guardar Producto</button>
+            <button type="button" class="cancel-button" onclick="window.location.href='index.html'">Cancelar</button>
+        </form>
+    </div>
+</body>
+</html>
