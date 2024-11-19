@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Panel Principal</title>
-
-        <link rel="stylesheet" href="../reset.css">
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - Gestión de Trabajadores</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -20,18 +18,18 @@
                         <span class="title">PERUPIXEL</span>   
                     </a>
                 </li>
-                <li class="divider"></li> <!-- Línea divisoria -->
-                <li><a href="#"><span >Panel Principal</span></a></li>
-                <li><a href="../Ordenes/index.html"><span >Órdenes</span></a></li>
-                <li><a href="../Inventario/index.html"><span >Inventario</span></a></li>
+                <li class="divider"></li>
+                <li><a href="../Dashboard/index.html"><span >Panel Principal</span></a></li>
+                <li><a href="../Ordenes/Órdenes de Compra 2.html"><span >Órdenes</span></a></li>
+                <li><a href="../Inventario/index.html"><span>Inventario</span></a></li>
                 <li><a href="../Reportes/index.html"><span >Reportes</span></a></li>
-                <li class="separator"></li> <!-- Línea divisoria -->
-                <li class="fin"><a href="../Inicio Sesion/index.html"><span >Salir</span></a></li>
+                <li class="separator"></li>
+                <li class="fin"><a href="../Inicio Sesion/index.html"><span>Salir</span></a></li>
             </ul>
         </div>
         <div class="main">
             <div class="topbar">             
-                <h1 >Panel Principal</h1>
+                <h1>Gestión de Trabajadores</h1>
                 <div class="user">
                     <img src="../imagenes/usuarioVacio.png" alt="Usuario">
                 </div>
@@ -39,95 +37,98 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
-                        <div class="cardName">Visitas Diarias</div>
+                        <div class="numbers">125</div>
+                        <div class="cardName">Trabajadores Activos</div>
                     </div>
                     <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
+                        <ion-icon name="people-outline"></ion-icon>
                     </div>
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
-                        <div class="cardName">Ventas</div>
+                        <div class="numbers">15</div>
+                        <div class="cardName">Inactivos</div>
                     </div>
                     <div class="iconBx">
-                        <ion-icon name="cart-outline"></ion-icon>
+                        <ion-icon name="person-remove-outline"></ion-icon>
                     </div>
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
-                        <div class="cardName">Comentarios</div>
+                        <div class="numbers">140</div>
+                        <div class="cardName">Total Trabajadores</div>
                     </div>
                     <div class="iconBx">
-                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                        <ion-icon name="briefcase-outline"></ion-icon>
                     </div>
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">S/7,842</div>
-                        <div class="cardName">Ganancias</div>
+                        <div class="numbers">8</div>
+                        <div class="cardName">Solicitudes Pendientes</div>
                     </div>
                     <div class="iconBx">
-                        <ion-icon name="cash-outline"></ion-icon>
+                        <ion-icon name="document-outline"></ion-icon>
                     </div>
                 </div>
             </div>
             <!-- ================ Graficas ================= -->
             <div class="chartsBx">
-                <div class="chart"> <canvas id="chart-1"></canvas> </div>
-                <div class="chart"> <canvas id="chart-2"></canvas> </div>
+                <div class="chart">
+                    <canvas id="chart-1"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="chart-2"></canvas>
+                </div>
             </div>
-          
-            <!-- ================ Lista de Detalles de Órdenes ================= -->
+            <!-- ================ Lista de Actividades ================= -->
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Órdenes Recientes</h2>
-                        <a href="#" class="btn">Ver Todas</a>
+                        <h2>Empleados Recientes</h2>
+                        <a href="#" class="btn">Ver Todos</a>
                     </div>
                     <table>
                         <thead>
                             <tr>
                                 <td>Nombre</td>
-                                <td>Precio</td>
-                                <td>Pago</td>
+                                <td>Departamento</td>
+                                <td>Antigüedad</td>
                                 <td>Estado</td>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Refrigeradora Star</td>
-                                <td>S/1,200</td>
-                                <td>Pagado</td>
-                                <td><span class="status delivered">Entregado</span></td>
-                            </tr>
-                            <tr>
-                                <td>Laptop Dell</td>
-                                <td>S/110</td>
-                                <td>Pendiente</td>
-                                <td><span class="status pending">Pendiente</span></td>
-                            </tr>
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>S/1,200</td>
-                                <td>Pagado</td>
-                                <td><span class="status return">Devuelto</span></td>
-                            </tr>
-                            <tr>
-                                <td>Zapatillas Adidas</td>
-                                <td>S/620</td>
-                                <td>Pendiente</td>
-                                <td><span class="status inProgress">En Proceso</span></td>
-                            </tr>
+                        <tbody id="empleados-tbody">
+                            <!-- Las filas se generarán dinámicamente -->
                         </tbody>
                     </table>
                 </div>
-                <!-- ================= Clientes Recientes ================ -->
+                <div class="modal-overlay" id="overlay"></div>
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Detalles de los Empleados</h2>
+        <table id="modal-empleados-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Departamento</th>
+                    <th>Antigüedad</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas generadas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+                  
+                
+                <!-- ================= Trabajadores Nuevos ================ -->
                 <div class="recentCustomers">
                     <div class="cardHeader">
-                        <h2>Clientes Recientes</h2>
+                        <h2>Trabajadores Nuevos</h2>
                     </div>
                     <table>
                         <tr>
@@ -135,7 +136,7 @@
                                 <div class="imgBx"><img src="../imagenes/usuarioVacio.png" alt=""></div>
                             </td>
                             <td>
-                                <h4>David <br> <span>Italia</span></h4>
+                                <h4>María Rojas <br> <span>RR.HH.</span></h4>
                             </td>
                         </tr>
                         <tr>
@@ -143,20 +144,20 @@
                                 <div class="imgBx"><img src="../imagenes/usuarioVacio.png" alt=""></div>
                             </td>
                             <td>
-                                <h4>Amit <br> <span>India</span></h4>
+                                <h4>Pedro Salas <br> <span>IT</span></h4>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
+           
+
         </div>
     </div>
-   
-    <!-- ======= graficas ====== -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="../Dashboard/chartsJS.js"></script>
-    <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
+

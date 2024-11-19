@@ -291,6 +291,8 @@ table tbody tr td .status {
 }
 
 /* ===================== Clientes ===================== */
+
+
 .details .recentCustomers table {
     width: 100%;
     border-collapse: collapse;
@@ -316,6 +318,68 @@ table tbody tr td .status {
 h4 {
     margin-left: 10px;
 }
+.modal-overlay {
+    position: fixed; /* Fija el overlay sin afectar el flujo del diseño */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    z-index: 999; /* Asegura que el overlay esté sobre todos los elementos */
+    display: none; /* Oculta el overlay por defecto */
+}
+.modal {
+    display: none; /* Ocultar modal por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+}
+
+.modal-content {
+    position: relative;
+    margin: 15% auto;
+    background-color: white;
+    padding: 20px;
+    padding-top: 40px; /* Ajusta el valor según lo que necesites */
+    width: 80%;
+    max-width: 600px;
+}
+
+
+#modal-empleados-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#modal-empleados-table th, #modal-empleados-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+#modal-empleados-table th {
+    background: #f4f4f4;
+}
+
+/* Estilo del botón de cerrar (X) */
+.modal-close {
+    position: absolute;
+    top: 10px; /* Distancia desde el borde superior */
+    right: 10px; /* Distancia desde el borde derecho */
+    font-size: 30px; /* Tamaño adecuado para la X */
+    cursor: pointer;
+    color: black; /* Color de la X */
+    background: transparent; /* Sin fondo */
+    border: none; /* Sin borde */
+}
+
+.modal-close:hover {
+    color: red; /* Color cuando se pasa el cursor */
+}
+
 
 /* ====================== Responsive ========================== */
 @media (max-width: 991px) {
@@ -384,3 +448,4 @@ h4 {
       left: initial;
     }
 }
+
