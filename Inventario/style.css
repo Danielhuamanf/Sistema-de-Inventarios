@@ -14,10 +14,11 @@
     --black2: #999;
 }
 
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Asegura que no se desborde la página */
 }
 
 .container {
@@ -143,41 +144,117 @@ body {
     object-fit: cover;
 }
 
-/* Boton modal */
-
+/* Estilos generales para el modal */
 .modal {
-    display: none;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    gap: 20px;  
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0; /* Elimina cualquier padding adicional */
+    margin: 0; /* Asegura que no haya márgenes en el contenedor */
 }
-  
+
+/* Contenedor del contenido del modal */
 .modal-content {
     background-color: #fff;
-    margin: auto;
+    margin: 5% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
+    border-radius: 10px;
+    width: 90%; /* Más ancho */
+    max-width: 900px; /* Ajusta el máximo para pantallas grandes */
+    max-height: 90vh; /* Limita el alto */
+    overflow-y: auto; /* Scroll vertical si es necesario */
+    overflow-x: auto; /* Scroll horizontal si es necesario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: grid; /* Habilita diseño con grid */
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+    gap: 20px; /* Espacio entre elementos */
 }
-  
+
+/* Animación para el modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botón de cerrar */
 .close {
-    color: #aaa;
+    color: #333;
     float: right;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
-}
-  
-.close:hover, .close:focus {
-    color: black;
-    text-decoration: none;
     cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: #f00;
+}
+
+/* Estilo de los encabezados */
+#modalTitle {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+/* Estilos del formulario */
+form {
+    display: contents;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+
+}
+
+input,
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    width: 100%; /* Asegura que los campos llenen el espacio */
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #007bff; /* Color destacado */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botón guardar */
+button {
+    grid-column: span 2; /* Botón ocupa las dos columnas */
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 /* Cabecera y Filtro */

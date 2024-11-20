@@ -97,6 +97,7 @@ function openModal(mode, product = null) {
         document.getElementById("productType").value = product.tipo;
         document.getElementById("productStock").value = product.stock;
         document.getElementById("productPrice").value = product.cost;
+        document.getElementById("productWorker").value = product.assignedWorker;
         document.getElementById("productStatus").value = product.status || "";
         document.getElementById("authorizedBy").value = product.authorizedBy || "";
         document.getElementById("productAdditionalInfo").value = product.additionalInfo || "";
@@ -136,6 +137,7 @@ document.getElementById("productForm").addEventListener("submit", (e) => {
     const productType = document.getElementById("productType").value;
     const productStock = document.getElementById("productStock").value;
     const productPrice = document.getElementById("productPrice").value;
+    const productWorker = document.getElementById("productWorker").value;
     const productStatus = document.getElementById("productStatus").value;
     const authorizedBy = document.getElementById("authorizedBy").value;
     const productAdditionalInfo = document.getElementById("productAdditionalInfo").value;
@@ -148,6 +150,7 @@ document.getElementById("productForm").addEventListener("submit", (e) => {
         tipo: productType,
         stock: parseInt(productStock),
         cost: parseFloat(productPrice),
+        assignedWorker: productWorker,
         status: productStatus,
         authorizedBy: authorizedBy,
         additionalInfo: productAdditionalInfo,
