@@ -27,12 +27,11 @@ function renderTable() {
         newRow.innerHTML = `
             <td>${order.fecha}</td>
             <td>${order.numOrden}</td>
-            <td>${order.cliente}</td>
+            <td>${order.empleado}</td>
             <td>${order.producto}</td>
             <td>${order.categoria}</td>
             <td>${order.unidades}</td>
             <td>${order.estado}</td>
-            <td>S/ ${parseFloat(order.total).toFixed(2)}</td>
             <td class="action-cell">
                 <div class="action-buttons">
                     <button class="action-btn edit-btn" title="Editar">
@@ -74,20 +73,19 @@ saveBtn.addEventListener('click', () => {
 
     const fecha = document.getElementById('fecha').value;
     const numOrden = document.getElementById('numOrden').value;
-    const cliente = document.getElementById('cliente').value;
+    const empleado = document.getElementById('empleado').value;
     const producto = document.getElementById('producto').value;
     const categoria = document.getElementById('categoria').value;
     const unidades = document.getElementById('unidades').value;
-    const estado = document.getElementById('estado').value;
-    const total = document.getElementById('total').value;    
+    const estado = document.getElementById('estado').value;   
 
     // Validar que todos los campos estén llenos
-    if (!fecha || !numOrden || !cliente || !producto || !estado || !total || !unidades || !categoria) {
+    if (!fecha || !numOrden || !empleado || !producto || !estado || !unidades || !categoria) {
         alert('Por favor, completa todos los campos antes de guardar.');
         return;
     }
 
-    const newOrder = { fecha, numOrden, cliente, producto, estado, total, unidades, categoria };
+    const newOrder = { fecha, numOrden, empleado, producto, estado, unidades, categoria };
 
     if (editMode && rowToEdit) {
         // Editar una fila existente
@@ -108,12 +106,11 @@ saveBtn.addEventListener('click', () => {
 function clearModalFields() {
     document.getElementById('fecha').value = '';
     document.getElementById('numOrden').value = '';
-    document.getElementById('cliente').value = '';
+    document.getElementById('empleado').value = '';
     document.getElementById('producto').value = '';
     document.getElementById('categoria').value = '';
     document.getElementById('unidades').value = '';
     document.getElementById('estado').value = '';
-    document.getElementById('total').value = '';
 }
 
 function attachRowEventListeners(row) {
@@ -127,12 +124,11 @@ function attachRowEventListeners(row) {
         const cells = row.querySelectorAll('td');
         document.getElementById('fecha').value = cells[0].textContent;
         document.getElementById('numOrden').value = cells[1].textContent;
-        document.getElementById('cliente').value = cells[2].textContent;
+        document.getElementById('empleado').value = cells[2].textContent;
         document.getElementById('producto').value = cells[3].textContent;
         document.getElementById('categoria').value = cells[5].textContent;
         document.getElementById('unidades').value = cells[6].textContent;
         document.getElementById('estado').value = cells[4].textContent;
-        document.getElementById('total').value = parseFloat(cells[7].textContent.replace('S/ ', ''));
 
         modal.style.display = 'block';
     });
