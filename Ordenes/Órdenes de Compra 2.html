@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes - PeruPixel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Estilo.css">
+    <link rel="stylesheet" href="styleDash.css">
+    <link rel="stylesheet" href="EstiloVentanaNueva.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <!-- Barra de navegación -->
+        <div class="navigation">
+    <ul>
+        <li class="logo-item">
+            <a href="#">
+                <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">  
+                <span class="title">PERUPIXEL</span>   
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li><a href="../Dashboard/index.html"><span>Panel Principal</span></a></li>
+        <li><a href="../Ordenes/Órdenes de Compra 2.html"><span>Órdenes</span></a></li>
+        <li><a href="../Inventario/index.html"><span>Inventario</span></a></li>
+        <li><a href="../Reportes/index.html"><span>Reportes</span></a></li>
+        <li class="separator"></li>
+        <li class="fin"><a href="../Inicio Sesion/index.html"><span>Salir</span></a></li>
+    </ul>
+</div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <div class="topbar">
+                <h1>Órdenes</h1>
+                <div class="user">
+                    <img src="../imagenes/usuarioVacio.png" alt="Usuario">
+                </div>
+            </div>
+
+            <div class="orders-section">
+                <div class="orders-header">
+                    <button id="newBtn" class="new-order-button">+ Nueva</button>
+                </div>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nº Orden</th>
+                            <th>Empleado</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Unidades</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- Las filas serán generadas dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Agregar Nueva Orden</h2>
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha">
+            </div>
+            <div class="form-group">
+                <label for="numOrden">Nº Orden:</label>
+                <input type="text" id="numOrden" placeholder="SO1v005">
+            </div>
+            <div class="form-group">
+                <label for="cliente">Empleado:</label>
+                <input type="text" id="empleado" placeholder="Nombre del Empleado">
+            </div>
+            <div class="form-group">
+                <label for="producto">Producto:</label>
+                <input type="text" id="producto" placeholder="Nombre del Producto">
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select id="categoria">
+                    <option value="">Selecciona una categoría</option>
+                    <option value="Equipos Tecnológicos">Equipos Tecnológicos</option>
+                    <option value="Material de Oficina">Material de Oficina</option>
+                    <option value="Consumibles">Consumibles</option>
+                    <option value="EPP">EPP</option>
+                    <option value="Material de Embalaje">Material de Embalaje</option>
+                    <option value="Software y Aplicaciones">Software y Aplicaciones</option>
+                    <option value="Vehículos y Mantenimiento">Vehículos y Mantenimiento</option>
+                    <option value="Promoción y Publicidad">Promoción y Publicidad</option>
+                    <option value="Limpieza y Salud">Limpieza y Salud</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="unidades">Unidades:</label>
+                <input type="number" id="unidades" placeholder="Cantidad">
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select id="estado">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Procesando">Procesando</option>
+                    <option value="Enviado">Enviado</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select>
+            </div>
+            <button id="saveBtn">Guardar</button>
+            <button id="cancelBtn">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="BotonNew.js"></script>
+</body>
+</html>
+
+    <!-- Script -->
+    <script src="BotonNew.js"></script>
+</body>
+</html>

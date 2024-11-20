@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte - PeruPixel</title>
+    <link rel="stylesheet" href="EstiloReporte.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">PERUPIXEL</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Órdenes</a></li>
+                    <li><a href="#">Inventario</a></li>
+                    <li><a href="#">Reportes</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="report-section">
+            <h1>Reporte de Entradas y Salidas</h1>
+            
+            <!-- Filtros del reporte -->
+            <div class="report-filters">
+                <div class="filter">
+                    <label for="date-start">Fecha de Inicio:</label>
+                    <input type="date" id="date-start" name="date-start">
+                </div>
+                
+                <div class="filter">
+                    <label for="date-end">Fecha de Fin:</label>
+                    <input type="date" id="date-end" name="date-end">
+                </div>
+
+                <div class="filter">
+                    <label for="provider">Proveedor:</label>
+                    <select id="provider" name="provider">
+                        <option value="">Seleccionar Proveedor</option>
+                        <option value="Proveedor 1">Proveedor 1</option>
+                        <option value="Proveedor 2">Proveedor 2</option>
+                        <option value="Proveedor 3">Proveedor 3</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="client">Cliente:</label>
+                    <select id="client" name="client">
+                        <option value="">Seleccionar Cliente</option>
+                        <option value="Oficina Central">Oficina Central</option>
+                        <option value="Departamento Legal">Departamento Legal</option>
+                        <option value="Finanzas">Finanzas</option>
+                        <option value="Recursos Humanos">Recursos Humanos</option>
+                    </select>
+                </div>
+
+                <button id="generate-report-btn">Generar Reporte</button>
+                <button id="add-report-btn">Agregar Reporte</button>
+                <button id="delete-all-btn">Eliminar Todos</button>
+                
+            </div>
+
+            <!-- Tabla de reportes -->
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Nº Orden</th>
+                        <th>Cliente</th>
+                        <th>Proveedor</th>
+                        <th>Estado</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+            </table>                
+
+            <!-- Total generado -->
+            <div class="total-container">
+                <span>Total generado: </span>
+                <span class="total-amount">S/ 0.00</span>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Agregar/Editar Reporte -->
+    <div class="modal" id="modal-report">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title">Agregar Reporte</h2>
+            <form id="modal-form">
+                <label for="modal-date">Fecha:</label>
+                <input type="date" id="modal-date" required>
+                
+                <label for="modal-order">Número de Orden:</label>
+                <input type="text" id="modal-order" required>
+                
+                <label for="modal-client">Cliente:</label>
+                <input type="text" id="modal-client" required>
+                
+                <label for="modal-provider">Proveedor:</label>
+                <input type="text" id="modal-provider" required>
+                
+                <label for="modal-status">Estado:</label>
+                <select id="modal-status" required>
+                    <option value="Recibido">Recibido</option>
+                    <option value="Prestado">Prestado</option>
+                    <option value="Pendiente">Pendiente</option>
+                </select>
+                
+                <label for="modal-total">Total (S/):</label>
+                <input type="number" id="modal-total" required>
+                
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Reporte Final -->
+    <div class="modal" id="modal-print">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Reporte Generado</h2>
+            <div id="printable-report">
+                <!-- Contenido generado dinámicamente -->
+            </div>
+            <button onclick="window.print()">Imprimir</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: "ubuntu", sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
 }
@@ -80,6 +80,7 @@ body {
 
 /* +New button */
 .new-order-button {
+    margin-left: auto;
     background-color: #007bff;
     color: white;
     border: none;
@@ -87,7 +88,6 @@ body {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: auto;
 }
 
 .new-order-button:hover {
@@ -121,8 +121,61 @@ body {
 
 .orders-table td {
     color: #333;
+    vertical-align: middle; /* Centrar verticalmente */
 }
 
 .orders-table td:last-child {
     font-weight: bold;
+}
+
+/* Centrar la columna de acciones */
+.action-cell {
+    text-align: center; /* Centrar horizontalmente */
+    vertical-align: middle; /* Centrar verticalmente */
+    display: flex; /* Usar flexbox para alinear contenido */
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* Espaciado entre los botones */
+}
+
+/* Botones de acción */
+.action-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 5px;
+    color: #007bff;
+    font-size: 20px;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: scale(1.2);
+    color: #0056b3;
+}
+
+.action-btn .material-icons {
+    vertical-align: middle;
+}
+
+.edit-btn {
+    color: #007BFF;
+}
+
+.edit-btn:hover {
+    color: #fefefe;
+}
+
+.delete-btn {
+    color: #DC3545;
+}
+
+.delete-btn:hover {
+    color: #c82333;
+}
+
+.orders-table th:last-child {
+    text-align: center; /* Centrar el texto del encabezado de la última columna */
 }
