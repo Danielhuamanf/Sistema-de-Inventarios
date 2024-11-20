@@ -1,28 +1,35 @@
-// Filtrar productos
-document.querySelectorAll(".filters select").forEach((filter) => {
-    filter.addEventListener("change", applyFilters);
-});
+const assignedFilter = document.getElementById("assignedFilter");
+const areaFilter = document.getElementById("areaFilter");
+const typeFilter = document.getElementById("typeFilter");
 
 function applyFilters() {
-    const assignedFilter = document.getElementById("assignedFilter").value;
-    const areaFilter = document.getElementById("areaFilter").value;
-    const typeFilter = document.getElementById("typeFilter").value;
+    let filteredProducts = [...productos];
 
-    let filteredData = inventoryData;
-
-    // Filtro de asignación
-    if (assignedFilter !== "all") {
-        filteredData = filteredData.filter((item) =>
-            assignedFilter === "assigned" ? item.status === "Asignado" : item.status === "No asignado"
+    // Filtro por asignación
+    if (assignedFilter.value !== "all") {
+        filteredProducts = filteredProducts.filter((p) =>
+            assignedFilter.value === "assigned" ? p.assignedWorker : !p.assignedWorker
         );
     }
 
-    // Filtro de área
-    if (areaFilter !== "all") {
-        filteredData = filteredData.filter((item) => item.area.toLowerCase().includes(areaFilter));
+    // Filtro por área
+    if (areaFilter.value !== "all") {
+        filteredProducts = filteredProducts.filter((p) => p.area === areaFilter.value);
     }
 
-    // Renderizar tabla con datos filtrados
-    renderTable(filteredData);
+    // Filtro por tipo
+    document.getElementById("typeFilter").addEventListener("change", (e) => {
+        const filterValue = e.target.value;
+        const filteredData = filterValue === "all"
+            ? productos
+            : productos.filter((p) => p.tipo === filterValue);
+        renderTable(filteredData);
+    });
+
+    renderTable(filteredProducts);
 }
 
+// Eventos de filtros
+assignedFilter.addEventListener("change", applyFilters);
+areaFilter.addEventListener("change", applyFilters);
+typeFilter.addEventListener("change", applyFilters);

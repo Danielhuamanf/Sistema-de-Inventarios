@@ -1,125 +1,170 @@
-// Datos de ejemplo de productos y empleados por área
-const areas = {
-    "administrative": {
-        name: "Área Administrativa y de Gestión",
-        empleados: ["Gerente de logística", "Coordinador de operaciones", "Analista logístico", "Especialista en cadena de suministro", "Asistente administrativo"],
-        objetos: ["Laptop", "Teléfono corporativo", "SAP, Oracle", "Material de oficina", "Conexión a internet", "Zoom, Teams, Slack"]
-    },
-    "operational": {
-        name: "Área Operativa",
-        empleados: ["Supervisor de almacén", "Encargado de inventarios", "Operador logístico", "Jefe de transporte"],
-        objetos: ["Tablet o laptop", "Teléfono corporativo", "Escáner de códigos de barras", "EPP", "Transpaletas", "Montacargas"]
-    },
-    "transport": {
-        name: "Área de Transporte",
-        empleados: ["Chofer de transporte", "Repartidor de última milla", "Coordinador de rutas"],
-        objetos: ["GPS", "Teléfono móvil corporativo", "Kit de emergencia para vehículos", "Dispositivo de firma electrónica", "EPP"]
-    },
-    "technological": {
-        name: "Área Tecnológica",
-        empleados: ["Desarrollador de sistemas", "Analista de datos", "Soporte técnico"],
-        objetos: ["Laptop de alto rendimiento", "IDE", "Monitores adicionales", "Acceso a plataformas de gestión de datos"]
-    },
-    "customer-service": {
-        name: "Área de Atención al Cliente",
-        empleados: ["Ejecutivo de servicio al cliente", "Coordinador de cuentas clave", "Soporte postventa"],
-        objetos: ["Computadora de escritorio", "Teléfono fijo", "CRM", "Auriculares", "Sistema de rastreo de envíos"]
-    },
-    "sales-marketing": {
-        name: "Área de Ventas y Marketing",
-        empleados: ["Ejecutivo de ventas", "Especialista en marketing digital"],
-        objetos: ["Laptop", "Google Ads", "Adobe Illustrator", "Material promocional"]
-    }
-};
-
-const productos = [
-    { nombre: "Laptop", area: "administrative", tipo: "non-consumable", estado: "assigned", trabajador: "Gerente de logística", consumible: false },
-    { nombre: "Escáner de códigos de barras", area: "operational", tipo: "non-consumable", estado: "unassigned", trabajador: "", consumible: false },
-    { nombre: "GPS", area: "transport", tipo: "non-consumable", estado: "assigned", trabajador: "Chofer de transporte", consumible: false },
-    { nombre: "Monitores adicionales", area: "technological", tipo: "non-consumable", estado: "assigned", trabajador: "Desarrollador de sistemas", consumible: false },
-    { nombre: "Auriculares", area: "customer-service", tipo: "consumable", estado: "unassigned", trabajador: "", consumible: true },
-    { nombre: "Folletos promocionales", area: "sales-marketing", tipo: "consumable", estado: "assigned", trabajador: "Ejecutivo de ventas", consumible: true },
-    { nombre: "Papel bond", area: "administrative", tipo: "consumable", estado: "unassigned", trabajador: "", consumible: true },
-    { nombre: "Cartuchos de tóner", area: "administrative", tipo: "consumable", estado: "assigned", trabajador: "Coordinador de operaciones", consumible: true }
+let productos = [
+    { id: 1, description: "Producto 1", stock: 10, cost: 25.5, additionalInfo: "N/A", status: "Disponible", assignedWorker: "Juan", area: "operational", authorizedBy: "Pedro", tipo: "consumable" },
+    { id: 2, description: "Producto 2", stock: 0, cost: 40.0, additionalInfo: "En reparación", status: "Reparación", assignedWorker: "Ana", area: "technological", authorizedBy: "Luis", tipo: "non-consumable" },
+    // Más productos...
 ];
 
-// Función para generar un valor aleatorio
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const rowsPerPage = 10;
+let currentPage = 1;
 
-// Función para actualizar la tabla según los filtros seleccionados
-const updateTable = () => {
-    const assignedFilter = document.getElementById('assignedFilter').value;
-    const areaFilter = document.getElementById('areaFilter').value;
-    const typeFilter = document.getElementById('typeFilter').value;
-    
-    // Limpiar el contenido de la tabla antes de agregar los nuevos productos filtrados
-    const tableBody = document.getElementById('inventoryTableBody');
+// Renderiza la tabla con los datos actuales
+function renderTable(data) {
+    const tableBody = document.getElementById("inventoryTableBody");
     tableBody.innerHTML = "";
 
-    // Filtrar los productos según los valores de los filtros
-    const filteredProducts = productos.filter(product => {
-        const isAssigned = assignedFilter === "all" || product.estado === assignedFilter;
-        const isAreaMatch = areaFilter === "all" || product.area === areaFilter;
-        const isTypeMatch = typeFilter === "all" || product.tipo === typeFilter;
-        
-        return isAssigned && isAreaMatch && isTypeMatch;
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const pageData = data.slice(start, end);
+
+    pageData.forEach((product) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${product.description}</td>
+            <td>${product.stock}</td>
+            <td>${product.cost.toFixed(2)}</td>
+            <td>${product.additionalInfo || "N/A"}</td>
+            <td>${product.status || "Sin estado"}</td>
+            <td>${product.assignedWorker || "N/A"}</td>
+            <td>${product.area}</td>
+            <td>${product.authorizedBy || "N/A"}</td>
+            <td>${product.tipo === "consumable" ? "Consumible" : "No Consumible"}</td>
+            <td>
+                <button class="action-btn edit" data-id="${product.id}"><ion-icon name="pencil-outline"></ion-icon></button>
+                <button class="action-btn delete" data-id="${product.id}"><ion-icon name="trash-outline"></ion-icon></button>
+            </td>
+        `;
+        tableBody.appendChild(tr);
     });
 
-    // Llenar la tabla con los productos filtrados
-    filteredProducts.forEach(product => {
-        const row = document.createElement('tr');
-        
-        const description = document.createElement('td');
-        description.textContent = product.nombre;
-        row.appendChild(description);
-        
-        const stock = document.createElement('td');
-        stock.textContent = getRandomInt(0, 100); // Stock aleatorio entre 0 y 100
-        row.appendChild(stock);
-        
-        const price = document.createElement('td');
-        price.textContent = `$${getRandomInt(100, 1000)}`; // Precio aleatorio entre 100 y 1000
-        row.appendChild(price);
-        
-        const additionalInfo = document.createElement('td');
-        additionalInfo.textContent = product.tipo === "consumable" ? "Reemplazo frecuente" : "Duradero";
-        row.appendChild(additionalInfo);
-        
-        const status = document.createElement('td');
-        status.textContent = product.estado === "assigned" ? "Asignado" : "No asignado";
-        row.appendChild(status);
-        
-        const assignedWorker = document.createElement('td');
-        assignedWorker.textContent = product.trabajador || "No asignado";
-        row.appendChild(assignedWorker);
-        
-        const areaCell = document.createElement('td');
-        areaCell.textContent = areas[product.area].name;
-        row.appendChild(areaCell);
-        
-        const authorizedBy = document.createElement('td');
-        authorizedBy.textContent = "Director General"; // Valor fijo por ejemplo
-        row.appendChild(authorizedBy);
-        
-        const functionality = document.createElement('td');
-        functionality.textContent = "Reparación"; // Valor fijo por ejemplo
-        row.appendChild(functionality);
-        
-        const actions = document.createElement('td');
-        actions.innerHTML = `<button class="action-btn">Editar</button><button class="action-btn">Eliminar</button>`;
-        row.appendChild(actions);
-        
-        tableBody.appendChild(row);
-    });
-};
+    updatePagination(data.length);
+}
 
-// Escuchar cambios en los filtros
-document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar la tabla con todos los productos
-    updateTable();
+// Actualiza los controles de paginación
+function updatePagination(totalRows) {
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+    document.getElementById("currentPage").textContent = currentPage;
+    document.getElementById("totalPages").textContent = totalPages;
 
-    // Añadir event listeners para actualizar la tabla cuando los filtros cambian
-    document.getElementById('assignedFilter').addEventListener('change', updateTable);
-    document.getElementById('areaFilter').addEventListener('change', updateTable);
-    document.getElementById('typeFilter').addEventListener('change', updateTable);
+    document.getElementById("prevPage").disabled = currentPage === 1;
+    document.getElementById("nextPage").disabled = currentPage === totalPages;
+}
+
+// Navegación de páginas
+document.getElementById("prevPage").addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+        renderTable(productos);
+    }
+});
+
+document.getElementById("nextPage").addEventListener("click", () => {
+    if (currentPage < Math.ceil(productos.length / rowsPerPage)) {
+        currentPage++;
+        renderTable(productos);
+    }
+});
+
+// Eventos para Editar y Eliminar
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".edit")) {
+        const productId = e.target.closest(".edit").dataset.id;
+        const product = productos.find((p) => p.id == productId);
+        openModal("edit", product);
+    } else if (e.target.closest(".delete")) {
+        const productId = e.target.closest(".delete").dataset.id;
+        deleteProduct(productId);
+    }
+});
+
+// Eliminar producto
+function deleteProduct(id) {
+    productos = productos.filter((p) => p.id != id);
+    renderTable(productos);
+}
+
+// Modal: abrir en modo agregar o editar
+function openModal(mode, product = null) {
+    const modal = document.getElementById("productModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const productForm = document.getElementById("productForm");
+
+    if (mode === "edit") {
+        // Modo editar: Rellenamos el formulario con los datos del producto
+        modalTitle.textContent = "Editar Producto";
+        document.getElementById("productId").value = product.id;
+        document.getElementById("productName").value = product.description;
+        document.getElementById("productArea").value = product.area;
+        document.getElementById("productType").value = product.tipo;
+        document.getElementById("productStock").value = product.stock;
+        document.getElementById("productPrice").value = product.cost;
+        document.getElementById("productStatus").value = product.status || "";
+        document.getElementById("authorizedBy").value = product.authorizedBy || "";
+        document.getElementById("productAdditionalInfo").value = product.additionalInfo || "";
+    } else if (mode === "add") {
+        // Modo agregar: Limpiar el formulario
+        modalTitle.textContent = "Añadir Producto";
+        document.getElementById("productForm").reset(); // Limpiar el formulario para un nuevo producto
+    }
+
+    modal.style.display = "block";
+}
+
+// Evento para abrir el modal al hacer clic en el botón "+ Nuevo"
+document.getElementById("addProductBtn").addEventListener("click", () => {
+    openModal("add"); // Modo añadir
+});
+
+// Cerrar modal si se hace clic fuera del contenido
+window.addEventListener("click", (e) => {
+    const modal = document.getElementById("productModal");
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+// Llenar tabla al cargar
+renderTable(productos);
+
+// Evento para el submit del formulario
+document.getElementById("productForm").addEventListener("submit", (e) => {
+    e.preventDefault(); // Evitar el comportamiento por defecto del formulario (recargar la página)
+
+    // Obtener los valores del formulario
+    const productId = document.getElementById("productId").value;
+    const productName = document.getElementById("productName").value;
+    const productArea = document.getElementById("productArea").value;
+    const productType = document.getElementById("productType").value;
+    const productStock = document.getElementById("productStock").value;
+    const productPrice = document.getElementById("productPrice").value;
+    const productStatus = document.getElementById("productStatus").value;
+    const authorizedBy = document.getElementById("authorizedBy").value;
+    const productAdditionalInfo = document.getElementById("productAdditionalInfo").value;
+
+    // Crear el objeto de producto con los datos
+    const product = {
+        id: productId ? parseInt(productId) : productos.length + 1, // Si tiene id, lo actualiza, si no, crea uno nuevo
+        description: productName,
+        area: productArea,
+        tipo: productType,
+        stock: parseInt(productStock),
+        cost: parseFloat(productPrice),
+        status: productStatus,
+        authorizedBy: authorizedBy,
+        additionalInfo: productAdditionalInfo,
+    };
+
+    if (productId) {
+        // Modo editar: Actualiza el producto existente
+        const productIndex = productos.findIndex((p) => p.id === parseInt(productId));
+        if (productIndex > -1) {
+            productos[productIndex] = product; // Reemplaza el producto en el array
+        }
+    } else {
+        // Modo agregar: Añade un nuevo producto
+        productos.push(product);
+    }
+
+    // Cierra el modal y recarga la tabla
+    document.getElementById("productModal").style.display = "none";
+    renderTable(productos);
 });

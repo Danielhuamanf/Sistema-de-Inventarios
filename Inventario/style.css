@@ -112,6 +112,7 @@ body {
     min-height: 100vh;
     background: var(--white);
     transition: 0.5s;
+    padding-bottom: 40px; /* Espacio adicional para navegación */
 }
 
 .topbar {
@@ -155,70 +156,60 @@ body {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     gap: 20px;  
-  }
+}
   
-  .modal-content {
+.modal-content {
     background-color: #fff;
-    margin: 15% auto;
+    margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
-  }
+    width: 80%;
+    max-width: 600px;
+}
   
-  .close {
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
+}
   
-  .close:hover, .close:focus {
+.close:hover, .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  } 
+}
 
-/* Filtro */
+/* Cabecera y Filtro */
 
 .header-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px;  
+    padding: 20px 40px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px; 
 }
 
 .filters select {
-    padding: 20px 20px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-right: 20px
+    font-size: 14px;
 }
 
-/* Tabla de inventario */
-
-.inventory-table {
-    overflow-x: auto;
-    margin-bottom: 20px;
-    gap: 20px;  
+.right-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaciado entre el botón y las notificaciones */
+    margin-left: auto;
 }
 
-.inventory-table table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.inventory-table th, .inventory-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ccc;
-}
-
-.add-product {
-    margin-top: 20px;
-}
-
-.add-product button {
-    padding: 10px 15px;
+#addProductBtn {
+    padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -226,57 +217,107 @@ body {
     cursor: pointer;
 }
 
-.add-product button:hover {
+addProductBtn:hover {
     background-color: #0056b3;
+}
+
+/* Notificaciones */
+
+.notifications {
+    position: relative;
+    cursor: pointer;
+}
+
+#notificationIcon {
+    font-size: 24px;
+}
+
+#notificationList {
+    position: absolute;
+    top: 35px;
+    right: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);    
+    display: none; 
+    z-index: 1000;
+}
+
+.notifications.active #notificationList {
+    display: block !important;/* Mostrar cuando esté activo */
+}
+
+#notificationList div {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+#notificationList div:last-child {
+    border-bottom: none;
+}
+
+/* Tabla de inventario */
+.inventory-table {
+    overflow-x: auto;
+    margin: 20px 40px;
+}
+
+.inventory-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inventory-table th {
+    background-color: var(--blue);
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+}
+
+.inventory-table th:last-child {
+    text-align: center; 
+}
+
+.inventory-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.action-cell {
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaciado entre botones */
 }
 
 .action-btn {
     background: none;
     border: none;
-    cursor: pointer;
-    font-size: 18px;
+    cursor: pointer;    
+    font-size: 20px;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
 }
 
 .action-btn.edit {
-    color: #4CAF50; /* Verde para editar */
+    color: #007BFF; /* Azul para editar */
 }
 
 .action-btn.delete {
     color: #F44336; /* Rojo para eliminar */
 }
 
-/* Notificaciones */
+/* Navegación Anterior/Siguiente */
 
-.notifications {
-    margin: 20px;
+.pagination {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: flex-end; 
-}
-
-#notificationIcon {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#notificationList {
-    position: absolute;
-    top: 30px;
-    right: 0;
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 300px;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none;
-}
-
-#notificationList.hidden {
-    display: none;
-}
-
-#notificationList div {
-    padding: 5px 0;
-    border-bottom: 1px solid #eee;
+    padding: 10px 40px;
 }
