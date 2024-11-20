@@ -23,13 +23,13 @@
                         <span class="title">PERUPIXEL</span>   
                     </a>
                 </li>
-                <li class="divider"></li>
-                <li><a href="../Dashboard/index.html"><span >Panel Principal</span></a></li>
-                <li><a href="../Ordenes/Órdenes de Compra 2.html"><span >Órdenes</span></a></li>
-                <li><a href="../Inventario/index.html"><span>Inventario</span></a></li>
-                <li><a href="../Reportes/index.html"><span >Reportes</span></a></li>
-                <li class="separator"></li>
-                <li class="fin"><a href="../Inicio Sesion/index.html"><span>Salir</span></a></li>
+                <li class="divider"></li> <!-- Línea divisoria -->
+                <li><a href="#"><span>Panel Principal</span></a></li>
+                <li><a href="#"><span>Órdenes</span></a></li>
+                <li><a href="#"><span>Inventario</span></a></li>
+                <li><a href="#"><span>Reportes</span></a></li>
+                <li class="separator"></li> <!-- Línea divisoria -->
+                <li class="fin"><a href="#"><span>Salir</span></a></li>
             </ul>
         </div>
 
@@ -51,12 +51,11 @@
                         <tr>
                             <th>Fecha</th>
                             <th>Nº Orden</th>
-                            <th>Cliente</th>
+                            <th>Empleado</th>
                             <th>Producto</th>
                             <th>Categoría</th>
                             <th>Unidades</th>
                             <th>Estado</th>
-                            <th>Total</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -82,8 +81,8 @@
                 <input type="text" id="numOrden" placeholder="SO1v005">
             </div>
             <div class="form-group">
-                <label for="cliente">Cliente:</label>
-                <input type="text" id="cliente" placeholder="Nombre del Cliente">
+                <label for="cliente">Empleado:</label>
+                <input type="text" id="empleado" placeholder="Nombre del Empleado">
             </div>
             <div class="form-group">
                 <label for="producto">Producto:</label>
@@ -117,14 +116,15 @@
                     <option value="Cancelado">Cancelado</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="total">Total (S/):</label>
-                <input type="number" id="total" placeholder="0.00">
-            </div>
             <button id="saveBtn">Guardar</button>
             <button id="cancelBtn">Cancelar</button>
         </div>
     </div>
+
+    <!-- Script -->
+    <script src="BotonNew.js"></script>
+</body>
+</html>
 
     <!-- Script -->
     <script src="BotonNew.js"></script>
