@@ -16,22 +16,22 @@
     <div class="container">
         <!-- Barra de navegación -->
         <div class="navigation">
-    <ul>
-        <li class="logo-item">
-            <a href="#">
-                <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">  
-                <span class="title">PERUPIXEL</span>   
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li><a href="../Dashboard/index.html"><span>Panel Principal</span></a></li>
-        <li><a href="../Ordenes/Órdenes de Compra 2.html"><span>Órdenes</span></a></li>
-        <li><a href="../Inventario/index.html"><span>Inventario</span></a></li>
-        <li><a href="../Reportes/index.html"><span>Reportes</span></a></li>
-        <li class="separator"></li>
-        <li class="fin"><a href="../Inicio Sesion/index.html"><span>Salir</span></a></li>
-    </ul>
-</div>
+            <ul>
+                <li class="logo-item">
+                    <a href="#">
+                        <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">
+                        <span class="title">PERUPIXEL</span>   
+                    </a>
+                </li>
+                <li class="divider"></li> <!-- Línea divisoria -->
+                <li><a href="#"><span>Panel Principal</span></a></li>
+                <li><a href="#"><span>Órdenes</span></a></li>
+                <li><a href="#"><span>Inventario</span></a></li>
+                <li><a href="#"><span>Reportes</span></a></li>
+                <li class="separator"></li> <!-- Línea divisoria -->
+                <li class="fin"><a href="#"><span>Salir</span></a></li>
+            </ul>
+        </div>
 
         <!-- Contenido principal -->
         <div class="main">
@@ -86,7 +86,10 @@
             </div>
             <div class="form-group">
                 <label for="producto">Producto:</label>
-                <input type="text" id="producto" placeholder="Nombre del Producto">
+                <select id="producto">
+                    <option value="" disabled selected>Seleccione un producto</option>
+                    <!-- Opciones generadas dinámicamente -->
+                </select>
             </div>
             <div class="form-group">
                 <label for="categoria">Categoría:</label>
@@ -121,12 +124,8 @@
         </div>
     </div>
 
-    <!-- Script -->
+    <!-- Scripts -->
     <script src="BotonNew.js"></script>
-</body>
-</html>
-
-    <!-- Script -->
-    <script src="BotonNew.js"></script>
+    <script src="Productos.js"></script>
 </body>
 </html>
