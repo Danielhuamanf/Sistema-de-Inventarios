@@ -12,27 +12,28 @@
 <body>
     <div class="container">
         <!-- Navegación lateral -->
-        <div class="navigation">
-            <ul>
-                <li class="logo-item">
-                    <a href="#">
-                        <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">  
-                        <span class="title">PERUPIXEL</span>   
-                    </a>
-                </li>
-                <li class="divider"></li> <!-- Línea divisoria -->
-                <li><a href="../Dashboard/index.html"><span>Dashboard</span></a></li>
-                <li><a href="../Ordenes/Órdenes de Compra 2.html"><span>Órdenes</span></a></li>
-                <li><a href="../Inventario/index.html"><span>Inventario</span></a></li>
-                <li><a href="#"><span>Reportes</span></a></li>
-                <li class="separator"></li> <!-- Línea divisoria -->
-                <li class="fin"><a href="../Inicio Sesion/index.html"><span>Salir</span></a></li>
-            </ul>
-        </div>
+        <aside class="navigation">
+            <div class="logo-item">
+                <a href="#">
+                    <img src="../imagenes/Logo.png" alt="Logo PeruPixel" class="logo-image">  
+                    <span class="title">PERUPIXEL</span>   
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../Dashboard/index.html">Dashboard</a></li>
+                    <li><a href="../Ordenes/Órdenes de Compra 2.html">Órdenes</a></li>
+                    <li><a href="../Inventario/index.html">Inventario</a></li>
+                    <li><a href="#">Reportes</a></li>
+                    <li class="separator"></li>
+                    <li><a href="../Inicio Sesion/index.html">Salir</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <!-- Sección Principal de Reportes -->
+        <!-- Sección Principal -->
         <div class="main">
-            <div class="topbar">             
+            <div class="topbar">
                 <h1>Reporte de Órdenes</h1>
                 <div class="user">
                     <img src="../imagenes/usuarioVacio.png" alt="Usuario">
@@ -93,7 +94,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    
+                        <!-- Filas generadas dinámicamente -->
                     </tbody>
                 </table>
 
@@ -104,6 +105,7 @@
             </main>
         </div>
 
+        <!-- Modal para Agregar/Editar Reporte -->
         <div class="modal" id="modal-report">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>
@@ -111,45 +113,44 @@
                 <form id="modal-form">
                     <label for="modal-date">Fecha:</label>
                     <input type="date" id="modal-date" required>
-                
+                    
                     <label for="modal-order">Número de Orden:</label>
                     <input type="text" id="modal-order" required>
-                
+                    
                     <label for="modal-client">Empleado:</label>
                     <input type="text" id="modal-client" required>
-                
+                    
                     <label for="modal-provider">Proveedor:</label>
                     <input type="text" id="modal-provider" required>
-                
+                    
                     <label for="modal-status">Estado:</label>
                     <select id="modal-status" required>
                         <option value="Recibido">Recibido</option>
                         <option value="Prestado">Prestado</option>
                         <option value="Pendiente">Pendiente</option>
                     </select>
-                
+                    
                     <label for="modal-total">Total (S/):</label>
                     <input type="number" id="modal-total" required>
-                
+                    
                     <button type="submit">Guardar</button>
                 </form>
             </div>
         </div>
 
+        <!-- Modal para Reporte Final -->
         <div class="modal" id="modal-print">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>
                 <h2>Reporte Generado</h2>
                 <div id="printable-report">
-                
+                    <!-- Contenido generado dinámicamente -->
                 </div>
                 <button onclick="window.print()">Imprimir</button>
             </div>
         </div>
 
         <script src="script.js"></script>
-        
     </div>
 </body>
 </html>
-
