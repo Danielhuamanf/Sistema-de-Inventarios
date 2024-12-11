@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Elementos principales
     const modal = document.querySelector("#modal-report");
     const modalPrint = document.querySelector("#modal-print");
     const modalForm = document.querySelector("#modal-form");
@@ -10,12 +11,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalAmountSpan = document.querySelector(".total-amount");
     const generateReportButton = document.querySelector("#generate-report-btn");
     const addReportButton = document.querySelector("#add-report-btn");
-    const deleteAllButton = document.querySelector("#delete-all-btn"); // Nuevo botón para eliminar todos
+    const deleteAllButton = document.querySelector("#delete-all-btn");
+
+    const startDateInput = document.querySelector("#date-start");
+    const endDateInput = document.querySelector("#date-end");
+    const providerSelect = document.querySelector("#provider");
+    const clientSelect = document.querySelector("#client");
 
     let isEditing = false;
     let editingIndex = null;
 
-    // Cargar datos desde LocalStorage
+    // Cargar datos desde LocalStorage o inicializar con valores predeterminados
     let reportData = JSON.parse(localStorage.getItem("reportData")) || [
         { date: "2024-06-01", order: "E001", client: "Oficina Central", provider: "Proveedor 1", status: "Recibido", total: 250 },
         { date: "2024-06-02", order: "S001", client: "Departamento Legal", provider: "Proveedor 2", status: "Prestado", total: 120 },
@@ -27,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("reportData", JSON.stringify(reportData));
     }
 
-    // Mostrar la ventana modal
+    // Mostrar ventana modal
     function showModal(editing = false, index = null) {
         modal.style.display = "flex";
         isEditing = editing;
@@ -36,24 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
         if (editing && index !== null) {
             modalTitle.textContent = "Editar Reporte";
             const currentData = reportData[index];
-            document.querySelector("#modal-date").value = currentData.date;
-            document.querySelector("#modal-order").value = currentData.order;
-            document.querySelector("#modal-client").value = currentData.client;
-            document.querySelector("#modal-provider").value = currentData.provider;
-            document.querySelector("#modal-status").value = currentData.status;
-            document.querySelector("#modal-total").value = currentData.total;
+            modalForm["modal-date"].value = currentData.date;
+            modalForm["modal-order"].value = currentData.order;
+            modalForm["modal-client"].value = currentData.client;
+            modalForm["modal-provider"].value = currentData.provider;
+            modalForm["modal-status"].value = currentData.status;
+            modalForm["modal-total"].value = currentData.total;
         } else {
             modalTitle.textContent = "Agregar Reporte";
             modalForm.reset();
         }
     }
 
-    // Ocultar la ventana modal
+    // Ocultar ventana modal
     function closeModal() {
         modal.style.display = "none";
     }
 
-    // Actualizar la tabla con los datos actuales
+    // Renderizar tabla
     function renderTable(data) {
         tableBody.innerHTML = ""; // Limpiar tabla
         let total = 0;
@@ -73,23 +79,50 @@ document.addEventListener("DOMContentLoaded", function () {
                 </td>
             `;
             tableBody.appendChild(row);
+
+            setTimeout(() => {
+                row.classList.add("show");
+            }, 10);
+
             total += item.total;
         });
 
-        // Actualizar el total generado
         totalAmountSpan.textContent = `S/ ${total.toFixed(2)}`;
     }
 
-    // Guardar el reporte nuevo o editado
+    // Filtrar reportes
+    function filterReports() {
+        const startDate = startDateInput.value;
+        const endDate = endDateInput.value;
+        const provider = providerSelect.value;
+        const client = clientSelect.value;
+
+        let filteredData = reportData;
+
+        if (startDate) filteredData = filteredData.filter(item => item.date >= startDate);
+        if (endDate) filteredData = filteredData.filter(item => item.date <= endDate);
+        if (provider) filteredData = filteredData.filter(item => item.provider === provider);
+        if (client) filteredData = filteredData.filter(item => item.client === client);
+
+        renderTable(filteredData);
+    }
+
+    // Guardar reporte
     modalForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const date = document.querySelector("#modal-date").value;
-        const order = document.querySelector("#modal-order").value;
-        const client = document.querySelector("#modal-client").value;
-        const provider = document.querySelector("#modal-provider").value;
-        const status = document.querySelector("#modal-status").value;
-        const total = parseFloat(document.querySelector("#modal-total").value);
+        const date = modalForm["modal-date"].value;
+        const order = modalForm["modal-order"].value;
+        const client = modalForm["modal-client"].value;
+        const provider = modalForm["modal-provider"].value;
+        const status = modalForm["modal-status"].value;
+        const total = parseFloat(modalForm["modal-total"].value);
+
+        // Validar campos obligatorios
+        if (!date || !order || !client || !provider || !status || isNaN(total)) {
+            alert("Por favor, completa todos los campos antes de guardar.");
+            return;
+        }
 
         if (isEditing && editingIndex !== null) {
             reportData[editingIndex] = { date, order, client, provider, status, total };
@@ -97,51 +130,46 @@ document.addEventListener("DOMContentLoaded", function () {
             reportData.push({ date, order, client, provider, status, total });
         }
 
-        saveToLocalStorage(); // Guardar cambios en LocalStorage
+        saveToLocalStorage();
         closeModal();
         renderTable(reportData);
     });
 
-    // Eliminar un reporte individual
-    function deleteReport(index) {
-        if (confirm("¿Estás seguro de que deseas eliminar este reporte?")) {
-            reportData.splice(index, 1);
-            saveToLocalStorage();
-            renderTable(reportData);
+    // Eliminar un reporte
+    tableBody.addEventListener("click", function (event) {
+        const target = event.target;
+
+        if (target.classList.contains("edit-btn")) {
+            const index = target.dataset.index;
+            showModal(true, index);
+        } else if (target.classList.contains("delete-btn")) {
+            const index = target.dataset.index;
+            if (confirm("¿Estás seguro de que deseas eliminar este reporte?")) {
+                reportData.splice(index, 1);
+                saveToLocalStorage();
+                renderTable(reportData);
+            }
         }
-    }
+    });
 
     // Eliminar todos los reportes
-    function deleteAllReports() {
+    deleteAllButton.addEventListener("click", function () {
         if (confirm("¿Estás seguro de que deseas eliminar todos los reportes?")) {
             reportData = [];
             saveToLocalStorage();
             renderTable(reportData);
         }
-    }
+    });
 
-    // Filtrar reportes por fechas
-    function filterReport() {
-        const startDate = document.querySelector("#date-start").value;
-        const endDate = document.querySelector("#date-end").value;
+    // Generar reporte imprimible
+    generateReportButton.addEventListener("click", function () {
+        const startDate = startDateInput.value;
+        const endDate = endDateInput.value;
 
-        let filteredData = reportData;
-
-        if (startDate) filteredData = filteredData.filter(item => item.date >= startDate);
-        if (endDate) filteredData = filteredData.filter(item => item.date <= endDate);
-
-        renderTable(filteredData);
-    }
-
-    // Mostrar el reporte para imprimir
-    function generatePrintableReport() {
-        const startDate = document.querySelector("#date-start").value;
-        const endDate = document.querySelector("#date-end").value;
-
-        let filteredData = reportData;
-
-        if (startDate) filteredData = filteredData.filter(item => item.date >= startDate);
-        if (endDate) filteredData = filteredData.filter(item => item.date <= endDate);
+        const filteredData = reportData.filter(item =>
+            (!startDate || item.date >= startDate) &&
+            (!endDate || item.date <= endDate)
+        );
 
         printableReport.innerHTML = `
             <h3>Reporte Generado</h3>
@@ -159,50 +187,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 </thead>
                 <tbody>
                     ${filteredData
-                        .map(
-                            item => `
-                        <tr>
-                            <td>${item.date}</td>
-                            <td>${item.order}</td>
-                            <td>${item.client}</td>
-                            <td>${item.provider}</td>
-                            <td>${item.status}</td>
-                            <td>S/ ${item.total.toFixed(2)}</td>
-                        </tr>
-                    `
-                        )
-                        .join("")}
+                        .map(item => `
+                            <tr>
+                                <td>${item.date}</td>
+                                <td>${item.order}</td>
+                                <td>${item.client}</td>
+                                <td>${item.provider}</td>
+                                <td>${item.status}</td>
+                                <td>S/ ${item.total.toFixed(2)}</td>
+                            </tr>
+                        `).join('')}
                 </tbody>
             </table>
         `;
+
         modalPrint.style.display = "flex";
-    }
-
-    // Ocultar el modal de impresión
-    function closePrintModal() {
-        modalPrint.style.display = "none";
-    }
-
-    // Eventos
-    addReportButton.addEventListener("click", () => showModal(false));
-    generateReportButton.addEventListener("click", generatePrintableReport);
-    deleteAllButton.addEventListener("click", deleteAllReports);
-
-    tableBody.addEventListener("click", function (event) {
-        if (event.target.classList.contains("edit-btn")) {
-            const index = event.target.getAttribute("data-index");
-            showModal(true, index);
-        } else if (event.target.classList.contains("delete-btn")) {
-            const index = event.target.getAttribute("data-index");
-            deleteReport(index);
-        }
     });
 
+    // Eventos de cierre de modal
     closeModalButtons.forEach(button => {
-        button.addEventListener("click", closeModal);
-        button.addEventListener("click", closePrintModal);
+        button.addEventListener("click", () => {
+            modal.style.display = "none";
+            modalPrint.style.display = "none";
+        });
     });
 
-    // Renderizar tabla inicial
+    // Inicializar tabla
     renderTable(reportData);
+
+    // Filtrar reportes cuando cambien los valores
+    [startDateInput, endDateInput, providerSelect, clientSelect].forEach(input => {
+        input.addEventListener("change", filterReports);
+    });
+
+    // Abrir modal para agregar reporte
+    addReportButton.addEventListener("click", () => showModal(false));
 });
