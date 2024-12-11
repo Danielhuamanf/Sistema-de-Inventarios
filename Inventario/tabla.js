@@ -1,4 +1,5 @@
-let productos = [
+// Cargar los productos desde localStorage o usar productos por defecto
+let productos = JSON.parse(localStorage.getItem("productos")) || [
     { id: 1, description: "Producto 1", stock: 10, cost: 25.5, additionalInfo: "N/A", status: "Disponible", assignedWorker: "Juan", area: "operational", authorizedBy: "Pedro", tipo: "consumable" },
     { id: 2, description: "Producto 2", stock: 0, cost: 40.0, additionalInfo: "En reparación", status: "Reparación", assignedWorker: "Ana", area: "technological", authorizedBy: "Luis", tipo: "non-consumable" },
     // Más productos...
@@ -7,7 +8,7 @@ let productos = [
 const rowsPerPage = 10;
 let currentPage = 1;
 
-// Renderiza la tabla con los datos actuales
+// Función para renderizar la tabla con los productos
 function renderTable(data) {
     const tableBody = document.getElementById("inventoryTableBody");
     tableBody.innerHTML = "";
@@ -39,7 +40,7 @@ function renderTable(data) {
     updatePagination(data.length);
 }
 
-// Actualiza los controles de paginación
+// Función para actualizar los controles de paginación
 function updatePagination(totalRows) {
     const totalPages = Math.ceil(totalRows / rowsPerPage);
     document.getElementById("currentPage").textContent = currentPage;
@@ -79,6 +80,7 @@ document.addEventListener("click", (e) => {
 // Eliminar producto
 function deleteProduct(id) {
     productos = productos.filter((p) => p.id != id);
+    saveToLocalStorage();  // Guardamos los productos actualizados en localStorage
     renderTable(productos);
 }
 
@@ -89,7 +91,6 @@ function openModal(mode, product = null) {
     const productForm = document.getElementById("productForm");
 
     if (mode === "edit") {
-        // Modo editar: Rellenamos el formulario con los datos del producto
         modalTitle.textContent = "Editar Producto";
         document.getElementById("productId").value = product.id;
         document.getElementById("productName").value = product.description;
@@ -102,17 +103,16 @@ function openModal(mode, product = null) {
         document.getElementById("authorizedBy").value = product.authorizedBy || "";
         document.getElementById("productAdditionalInfo").value = product.additionalInfo || "";
     } else if (mode === "add") {
-        // Modo agregar: Limpiar el formulario
         modalTitle.textContent = "Añadir Producto";
-        document.getElementById("productForm").reset(); // Limpiar el formulario para un nuevo producto
+        document.getElementById("productForm").reset();
     }
 
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 // Evento para abrir el modal al hacer clic en el botón "+ Nuevo"
 document.getElementById("addProductBtn").addEventListener("click", () => {
-    openModal("add"); // Modo añadir
+    openModal("add");
 });
 
 // Cerrar modal si se hace clic fuera del contenido
@@ -123,14 +123,18 @@ window.addEventListener("click", (e) => {
     }
 });
 
+// Función para guardar los productos en localStorage
+function saveToLocalStorage() {
+    localStorage.setItem("productos", JSON.stringify(productos));
+}
+
 // Llenar tabla al cargar
 renderTable(productos);
 
 // Evento para el submit del formulario
 document.getElementById("productForm").addEventListener("submit", (e) => {
-    e.preventDefault(); // Evitar el comportamiento por defecto del formulario (recargar la página)
+    e.preventDefault();
 
-    // Obtener los valores del formulario
     const productId = document.getElementById("productId").value;
     const productName = document.getElementById("productName").value;
     const productArea = document.getElementById("productArea").value;
@@ -142,9 +146,8 @@ document.getElementById("productForm").addEventListener("submit", (e) => {
     const authorizedBy = document.getElementById("authorizedBy").value;
     const productAdditionalInfo = document.getElementById("productAdditionalInfo").value;
 
-    // Crear el objeto de producto con los datos
     const product = {
-        id: productId ? parseInt(productId) : productos.length + 1, // Si tiene id, lo actualiza, si no, crea uno nuevo
+        id: productId ? parseInt(productId) : productos.length + 1,
         description: productName,
         area: productArea,
         tipo: productType,
@@ -157,17 +160,15 @@ document.getElementById("productForm").addEventListener("submit", (e) => {
     };
 
     if (productId) {
-        // Modo editar: Actualiza el producto existente
         const productIndex = productos.findIndex((p) => p.id === parseInt(productId));
         if (productIndex > -1) {
-            productos[productIndex] = product; // Reemplaza el producto en el array
+            productos[productIndex] = product;  // Actualiza el producto
         }
     } else {
-        // Modo agregar: Añade un nuevo producto
-        productos.push(product);
+        productos.push(product);  // Añade un nuevo producto
     }
 
-    // Cierra el modal y recarga la tabla
+    saveToLocalStorage();  // Guardamos los cambios en localStorage
     document.getElementById("productModal").style.display = "none";
     renderTable(productos);
 });
